@@ -1,0 +1,8 @@
+{
+  "name": "ECAM-IONIC",
+  "app_id": "93a47b3c",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
