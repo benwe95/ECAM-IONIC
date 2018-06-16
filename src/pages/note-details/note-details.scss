@@ -1,3 +1,10 @@
 page-note-details {
-
+  .note-card {
+    background: #545454;
+    border: 1px solid color($colors, secondary);
+  }
+  .note-info {
+    background: #4a4a4a;
+    text-color: #4a4a4a;
+  }
 }

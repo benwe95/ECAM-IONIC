@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import {Category} from "../../app/category";
 /*
   Generated class for the CategoryProvider provider.
 
@@ -17,18 +18,33 @@ export class CategoryProvider {
     console.log('Hello CategoryProvider Provider');
   }
 
-  private extractData(res: Response) {
-    let body = res;
-    return body || { };
+  /*private extractData(res: Response) {
+    /*let body = res;
+    /*body || { }
+   }*/
+
+
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl);
   }
 
-  getCategories(): Observable<{}> {
-    return this.http.get(this.baseUrl)
-      .pipe(
-        map(this.extractData),
-        catchError(this.handleError)
-      );
+
+  updateCategory(category: Category, id: number): Observable<{}> {
+    const updateUrl = `${this.baseUrl}/${id}`;
+    return this.http.put<Category>( updateUrl, category);
   }
+
+
+  addCategory(category: Category): Observable<{}>{
+    return this.http.post<Category>(this.baseUrl, category);
+  }
+
+
+  delCategory(id: number): Observable<{}>{
+    const updateUrl = `${this.baseUrl}/${id}`;
+    return this.http.delete(updateUrl);
+  }
+
 
   private handleError (error: Response | any) {
     let errMsg: string;

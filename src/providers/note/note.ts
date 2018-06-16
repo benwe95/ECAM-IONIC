@@ -16,22 +16,40 @@ export class NoteProvider {
 
   private baseUrl = 'http://localhost:8000/api/notes';
 
+
   constructor(private http: HttpClient) {
     console.log('Hello NoteProvider Provider');
   }
 
+
   private extractData(res: Response) {
+    console.log('extractData', res);
     let body = res;
     return body || { };
   }
 
-  getNotes(): Observable<{}> {
-    return this.http.get(this.baseUrl)
-      .pipe(
-        map(this.extractData),
-        catchError(this.handleError)
-      );
+
+  getNotes(): Observable<Note[]> {
+    return this.http.get<Note[]>(this.baseUrl);
   }
+
+
+  updateNote(note: Note, id: number): Observable<{}> {
+    const updateUrl = `${this.baseUrl}/${id}`;
+    return this.http.put<Note>( updateUrl, note);
+  }
+
+
+  addNote(note: Note): Observable<{}>{
+    return this.http.post<Note>(this.baseUrl, note);
+  }
+
+
+  delNote(id: number): Observable<{}>{
+    const updateUrl = `${this.baseUrl}/${id}`;
+    return this.http.delete( updateUrl);
+  }
+
 
   private handleError (error: Response | any) {
     let errMsg: string;

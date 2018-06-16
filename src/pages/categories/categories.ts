@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Config, IonicPage, NavController, NavParams} from 'ionic-angular';
 
 import { CategoryProvider } from "../../providers/category/category";
+import {CategoryFormPage} from "../category-form/category-form";
+import {Category} from "../../app/category";
 
 /**
  * Generated class for the CategoriesPage page.
@@ -17,23 +19,67 @@ import { CategoryProvider } from "../../providers/category/category";
 })
 export class CategoriesPage {
 
-  categories: any;
+  categories: Array<Category> = new Array<Category>();
   errorMessage: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private categoryProvider: CategoryProvider) {
-    this.getCategories()
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoriesPage');
+    this.getCategories()
+
   }
 
-  getCategories(): void {
+  ionViewWillEnter() {
+    this.getCategories()
+  }
+
+  /*getCategories(): void {
     this.categoryProvider.getCategories()
       .subscribe(
         categories => this.categories = categories,
-        error => this.errorMessage = <any>error);
+        () => this.sortCategories(),
+        );
+  }*/
+
+  getCategories(): void {
+    this.categoryProvider.getCategories()
+      .subscribe(categories => this.categories = this.sortCategories(categories));
+  }
+
+  addCategory(): void {
+    this.navCtrl.push(CategoryFormPage, {
+      selectedCategory: new Category(),
+      mode: "add"
+    });
+  }
+
+  delCategory(event, id: number): void{
+    this.categoryProvider.delCategory(id)
+      .subscribe(()=>this.ionViewWillEnter())
+  }
+
+  editCategory(event, selectedCategory: Category): void{
+    this.navCtrl.push(CategoryFormPage, {
+      selectedCategory: selectedCategory,
+      mode: "edit"
+    })
+  }
+
+  /* Sort the categories by their wording */
+  sortCategories(cat:Category[]): Category[]{
+    return cat.sort((cat1, cat2) => {
+      if (cat1.wording > cat2.wording) {
+        return 1;
+      }
+      if (cat1.wording < cat2.wording) {
+        return -1;
+      }
+      return 0;
+    });
   }
 }

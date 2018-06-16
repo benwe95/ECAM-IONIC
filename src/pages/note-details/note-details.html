@@ -5,26 +5,66 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>note-details</ion-title>
-  </ion-navbar>
-
+    <ion-navbar color="primary">
+      <ion-title>{{ selectedNote.title }}</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-grid>
-    <ion-col width-100>
-      <h3 text-center *ngIf="selectedNote">
-        {{selectedNote.title}}
-      </h3>
+  <ion-card class="note-card">
+    <ion-card-header>{{selectedNote.title.toUpperCase()}}</ion-card-header>
+    <ion-card-content>
+      {{selectedNote.content}}
+    </ion-card-content>
+
+    <ion-item class="note-info">
+      <ion-icon name="bookmark" item-left></ion-icon>
+      Category: {{category.wording}}
+    </ion-item>
+
+    <ion-item class="note-info">
+      <ion-icon name="calendar" item-left></ion-icon>
+      Last update: {{ selectedNote.updateDate |date:'dd/MM/yyyy'}}
+    </ion-item>
+
+    <button ion-button full (click)="editNote($event)" color="secondary">Edit</button>
+    <button ion-button full (click)="delNote($event)" color="danger">Delete</button>
+
+  </ion-card>
+</ion-content>
+
+<!--
+<ion-grid>
+  <ion-row>
+    <ion-col width-100 *ngIf="selectedNote">
       <ion-list>
-        <ion-item>
-          <strong>Content: </strong> {{selectedNote.content}}
+
+        <ion-item text-wrap>
+          <strong>Content: </strong>
+          <br/> {{selectedNote.content}}
         </ion-item>
+
+        <ion-item text-wrap>
+          <strong>Category: </strong>
+          <br/> {{selectedNote.category}}
+        </ion-item>
+
+        <ion-item text-wrap>
+          <strong>Last update on: </strong>
+          <br/> {{updateDate |  date:'dd/MM/yyyy HH:mm:ss'}}
+        </ion-item>
+
+
       </ion-list>
     </ion-col>
-  </ion-grid>
+  </ion-row>
+  <ion-row>
+    <button ion-button block (click)="editNote($event)">Edit</button>
+    <button ion-button block (click)="delNote($event)" color="danger">Delete</button>
+  </ion-row>
 
-</ion-content>
+</ion-grid>
+
+!-->
+

@@ -13,9 +13,19 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let note of notes" (click)="noteTapped($event, note)">
-      <h2>{{note.title}}</h2>
-    </ion-item>
-  </ion-list>
+      <button ion-button (click)="addNote()" block>Add</button>
+    <ion-list>
+        <ion-item-sliding #item *ngFor="let note of notes">
+          <ion-item (click)="noteTapped($event, note)">
+            <h2>{{note.title.toUpperCase()}}</h2>
+            <h3>{{note.updateDate| date:'dd/MM/yyyy HH:mm:ss'}}</h3>
+          </ion-item>
+
+          <ion-item-options side="left">
+            <button ion-button (click)="editNote($event, note)" color="secondary">Edit</button>
+            <button ion-button (click)="delNote($event, note.id)" color="danger">Delete</button>
+          </ion-item-options>
+
+        </ion-item-sliding>
+    </ion-list>
 </ion-content>

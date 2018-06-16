@@ -9,13 +9,16 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { NotesPage } from "../pages/notes/notes";
-import { CategoriesPage } from "../pages/categories/categories";
-import { NoteProvider } from '../providers/note/note';
-
 import { HttpClientModule } from "@angular/common/http";
-import {NoteDetailsPage} from "../pages/note-details/note-details";
+
+import { NotesPage } from "../pages/notes/notes";
+import { NoteProvider } from '../providers/note/note';
+import { NoteDetailsPage } from "../pages/note-details/note-details";
+import { CategoriesPage } from "../pages/categories/categories";
 import { CategoryProvider } from '../providers/category/category';
+import {NoteFormPage} from "../pages/note-form/note-form";
+import {CategoryFormPage} from "../pages/category-form/category-form";
+
 
 @NgModule({
   declarations: [
@@ -24,12 +27,14 @@ import { CategoryProvider } from '../providers/category/category';
     TabsPage,
     NotesPage,
     NoteDetailsPage,
-    CategoriesPage
+    NoteFormPage,
+    CategoriesPage,
+    CategoryFormPage,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,7 +43,9 @@ import { CategoryProvider } from '../providers/category/category';
     TabsPage,
     NotesPage,
     NoteDetailsPage,
-    CategoriesPage
+    NoteFormPage,
+    CategoriesPage,
+    CategoryFormPage,
   ],
   providers: [
     StatusBar,
