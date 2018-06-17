@@ -8,12 +8,14 @@
 
   <ion-navbar>
     <ion-title>Notes</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="black" (click)="addNote()"><ion-icon name="create"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-      <button ion-button (click)="addNote()" block>Add</button>
     <ion-list>
         <ion-item-sliding #item *ngFor="let note of notes">
           <ion-item (click)="noteTapped($event, note)">
