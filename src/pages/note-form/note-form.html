@@ -33,7 +33,9 @@
           <ion-item class="form-item">
             <ion-label>Category</ion-label>
             <ion-select formControlName="category">
-              <ion-option *ngFor="let category of categories">{{category.wording.toUpperCase()}}</ion-option>
+              <ion-option *ngFor="let category of categories" value="{{category.id}}">
+                {{category.wording.toUpperCase()}}
+              </ion-option>
             </ion-select>
           </ion-item>
           <button ion-button type="submit" [disabled]="!noteForm.valid" color="save" block>Save</button>

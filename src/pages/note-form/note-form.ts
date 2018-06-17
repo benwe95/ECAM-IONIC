@@ -59,6 +59,7 @@ export class NoteFormPage {
 
     this.selectedNote.title = this.noteForm.controls['title'].value;
     this.selectedNote.content = this.noteForm.controls['content'].value;
+    console.log('noteForm category', this.noteForm.controls['category'].value)
     this.selectedNote.category = this.noteForm.controls['category'].value;
 
     // Then look if the mode is EDIT or ADD

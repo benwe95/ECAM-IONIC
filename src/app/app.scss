@@ -25,9 +25,23 @@
 
 .form {
   background-color: #545454;
-
 }
+
 
 .form-item {
   color: #545454;
+  border: #1c1e22;
+}
+
+.date {
+  padding-left: 10px;
+  font-size: small;
+}
+
+.h2 {
+  font-style: bold;
+}
+
+.navbar{
+  color: color($colors, primary);
 }

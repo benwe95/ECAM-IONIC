@@ -17,8 +17,9 @@
     <ion-list>
         <ion-item-sliding #item *ngFor="let note of notes">
           <ion-item (click)="noteTapped($event, note)">
-            <h2>{{note.title.toUpperCase()}}</h2>
-            <h3>{{note.updateDate| date:'dd/MM/yyyy HH:mm:ss'}}</h3>
+            <h2>{{note.title.toUpperCase()}}  </h2>
+            <ion-icon name="arrow-forward" item-right></ion-icon>
+            <div class="date">{{note.updateDate| date:'dd/MM/yyyy HH:mm:ss'}}</div>
           </ion-item>
 
           <ion-item-options side="left">
